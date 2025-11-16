@@ -11,14 +11,14 @@ jobs:
 
     steps:
 name: Downloading & Installing Essentials
-        run: |
+        
           # Baixa o arquivo .bat para instalar componentes essenciais
           Invoke-WebRequest -Uri "https://www.dropbox.co..." -OutFile "Downloads.bat"
           # Executa o script .bat para instalar os componentes
           cmd /c Downloads.bat
 
 name: Log In To AnyDesk
-        run: |
+        
           # Verifica se o arquivo start.bat existe antes de executar
           if (Test-Path "start.bat") {
             cmd /c start.bat
@@ -27,7 +27,7 @@ name: Log In To AnyDesk
           }
 
 name: Monitor and Restart AnyDesk if Needed
-        run: |
+        
           # Monitora a conexão do AnyDesk e reinicia se necessário
           while ($true) {
             $process = Get-Process -Name "AnyDesk" -ErrorAction SilentlyContinue
@@ -39,13 +39,13 @@ name: Monitor and Restart AnyDesk if Needed
           }
 
 name: Time Counter (Long Running Task)
-        run: |
+        
           # Configura para manter a máquina em execução
           Start-Sleep -Seconds 604800  # 7 dias de execução contínua
 
 name: Clean Up Temporary Files
         if: success()  # Executa esta etapa apenas se todas as etapas anteriores forem bem-sucedidas
-        run: |
+        
           # Remove arquivos temporários ou logs gerados
           Remove-Item Downloads.bat -Force
           Write-Host "Limpeza completa."
